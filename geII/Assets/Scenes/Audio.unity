@@ -1231,6 +1231,7 @@ MonoBehaviour:
   menu: {fileID: 24500006, guid: 1e6f340eb3c40d844a73fc411ec99661, type: 2}
   battle: {fileID: 2677826476505057447, guid: 1e6f340eb3c40d844a73fc411ec99661, type: 2}
   walking: {fileID: 2804115092593548743, guid: 1e6f340eb3c40d844a73fc411ec99661, type: 2}
+  meuMixer: {fileID: 24100000, guid: 1e6f340eb3c40d844a73fc411ec99661, type: 2}
 --- !u!4 &1664803461
 Transform:
   m_ObjectHideFlags: 0
@@ -1515,9 +1516,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1933011544}
-        m_TargetAssemblyTypeName: BarraSom, Assembly-CSharp
-        m_MethodName: AtualizarVolume
+      - m_Target: {fileID: 1664803460}
+        m_TargetAssemblyTypeName: MixerController, Assembly-CSharp
+        m_MethodName: AlterarVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
