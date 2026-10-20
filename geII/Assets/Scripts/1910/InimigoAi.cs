@@ -16,6 +16,7 @@ public class InimigoAi : MonoBehaviour
 
     void Update()
     {
+        /*
         //se alvo não estiver vazio
         if (alvo != null)
         {
@@ -28,7 +29,9 @@ public class InimigoAi : MonoBehaviour
                 agent.SetDestination(alvo.position);
             }
            
-        }
+        }*/
+
+        agent.SetDestination(alvo.position);
     }
 
     private void OnDrawGizmos()
