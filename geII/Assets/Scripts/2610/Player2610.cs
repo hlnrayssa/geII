@@ -9,46 +9,97 @@ public class Player2610 : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       rb = GetComponent<Rigidbody>(); 
+       rb = GetComponent<Rigidbody>();
+        MudarStatus(PlayerStatus.Normal);
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (meuStatus)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            case PlayerStatus.Normal:
-                GetComponent<Renderer>().material.color = Color.purple;
-                Moves(1);
-                break;
-            case PlayerStatus.Paralizado:
-                GetComponent<Renderer>().material.color = Color.yellow;
-                Moves(0.5f);
-                break;
-            case PlayerStatus.Congelado:
-                GetComponent<Renderer>().material.color = Color.green;
-                break;
-            case PlayerStatus.Envenenado:
-                GetComponent<Renderer>().material.color = Color.blue;
-                Moves(1);
-                break;
+            MudarStatus(PlayerStatus.Normal);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            MudarStatus(PlayerStatus.Paralizado);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            MudarStatus(PlayerStatus.Congelado);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            MudarStatus(PlayerStatus.Envenenado);
+        }
+
+        UpdateStatus();
     }
 
+    #region Movimentacao
     void Moves(float debuffSpeed)
     {
         float dirX, dirZ;
         dirX = Input.GetAxis("Horizontal");
         dirZ = Input.GetAxis("Vertical");
         rb.linearVelocity = new Vector3(dirX, 0, dirZ) * speedMovimentacao * debuffSpeed;
-        
+
     }
-    
-    void MudarAstatus (PlayerStatus newStatus)
+    #endregion
+    void MudarStatus(PlayerStatus newStatus)
     {
-        if (meuStatus == PlayerStatus.Normal)
+        ExitStatus(meuStatus);
+        EnterStatus(newStatus);
+
+        meuStatus = newStatus;
+    }
+
+    void UpdateStatus()
+    {
+        switch (meuStatus)
         {
-            meuStatus = newStatus;
+            case PlayerStatus.Normal:
+                Moves(1);
+                break;
+            case PlayerStatus.Paralizado:
+                Moves(0.5f);
+                break;
+            case PlayerStatus.Congelado:
+                break;
+            case PlayerStatus.Envenenado:
+                Moves(1);
+                break;
+        }
+
+    }
+
+    void EnterStatus(PlayerStatus novoStatus)
+    {
+        switch (novoStatus)
+        {
+            case PlayerStatus.Normal:
+                GetComponent<Renderer>().material.color = Color.purple;
+                break;
+            case PlayerStatus.Paralizado:
+                GetComponent<Renderer>().material.color = Color.yellow;
+                break;
+            case PlayerStatus.Congelado:
+                GetComponent<Renderer>().material.color = Color.green;
+                transform.localScale *= 2f;
+                break;
+            case PlayerStatus.Envenenado:
+                GetComponent<Renderer>().material.color = Color.blue;
+                break;
+        }
+    }
+    void ExitStatus(PlayerStatus oldStatus)
+    {
+        switch (oldStatus)
+        {
+            case PlayerStatus.Congelado:
+                GetComponent<Renderer>().material.color = Color.green;
+                transform.localScale *= 0.5f;
+                break;
         }
     }
 
