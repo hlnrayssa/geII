@@ -8,12 +8,14 @@ public class UIGame : MonoBehaviour
     public Dropdown dropResolucoes;
     List<string> resolucoes = new List<string>();//lista pesa mais na memória do que um array
 
-    Resolution[] listaResolucoes; 
+    Resolution[] listaResolucoes;
+    public Toggle checkFull;
 
 
   
     void Start()
     {
+        Screen.fullScreen = checkFull.isOn;
         listaResolucoes = Screen.resolutions;
         CriarListaResolucoes();
 
@@ -50,7 +52,12 @@ public class UIGame : MonoBehaviour
         {
           */
 
-        Screen.SetResolution(listaResolucoes[indice].width, listaResolucoes[indice].height, false);
+        Screen.SetResolution(listaResolucoes[indice].width, listaResolucoes[indice].height, checkFull.isOn);
+    }
+
+    public void CheckFullScreen(bool value)
+    {
+        Screen.fullScreen = value;
     }
 }
 
