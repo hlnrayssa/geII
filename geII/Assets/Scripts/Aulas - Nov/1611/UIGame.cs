@@ -10,9 +10,8 @@ public class UIGame : MonoBehaviour
 
     Resolution[] listaResolucoes;
     public Toggle checkFull;
-
-
   
+
     void Start()
     {
         Screen.fullScreen = checkFull.isOn;
